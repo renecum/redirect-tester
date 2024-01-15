@@ -1,0 +1,16 @@
+{
+    "name": "renecum/redirect-tester",
+    "description": "A PHP package to test redirects.",
+    "autoload": {
+        "psr-4": {
+            "RedirectTester\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "René Cum",
+            "email": "rene@webandmobiles.com"
+        }
+    ],
+    "require": {}
+}
