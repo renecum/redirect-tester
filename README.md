@@ -8,7 +8,8 @@ Notes:
 Quick Usage:
 - Run `composer dump` to install dependencies.
 - Edit the `examples/index.php` file changing the domain and csv path.
-- Run `index.php` in the
+- Run `index.php`.
+
 
 Todo:
 - Improve error and exception handling.
