@@ -49,12 +49,17 @@ class Helpers {
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_NOBODY, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
         curl_setopt($ch, CURLOPT_VERBOSE, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_exec($ch);
-        $redirectURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        curl_exec($ch);        
+        if (!curl_errno($ch)) {
+            $redirectURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        } else {
+            echo "cURL Error: " . curl_error($ch);
+        }
         curl_close($ch);
         return $redirectURL;
     }
