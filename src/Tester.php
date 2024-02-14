@@ -10,7 +10,7 @@ class Tester
     private $skipHeader = false;
     private $testedFile = '';
     private $redirects = [];
-
+    private $appendToURLs = '';
 
     public function __construct($domain)
     {
@@ -56,6 +56,11 @@ class Tester
         return $this->redirects;
     }
 
+    public function appendToURLs($append)
+    {
+        $this->appendToURLs = $append;
+    }
+
     public static function testRedirect($source, $destination, &$resultURL)
     {
         $result = Helpers::fetchEffectiveUrl($source);
@@ -70,6 +75,11 @@ class Tester
         $this->testedFile = $filename;
         $this->extractRedirects($filename, $limit , $start);
         foreach ($this->redirects as $redirect) {
+            if ($this->appendToURLs !== '') {
+                $redirect->source .= $this->appendToURLs;
+                $redirect->destination .= $this->appendToURLs;
+            }
+    
             $redirect->works =  self::testRedirect($redirect->source, $redirect->destination, $redirect->destinationResult);
         }
     }
